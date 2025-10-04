@@ -8,18 +8,18 @@ function App() {
   const [includeCharactors, setIncludeCharactors] = useState(false)
   const passwordRef = useRef()
 
-  const copyPassword = () =>{
+  const copyPassword =useCallback( () =>{
     passwordRef.current?.select()
     window.navigator.clipboard.writeText(password);
     alert("password copyed:")
 
-  }
+  },[length,includeNumbers,includeCharactors,setPassword])
 
   useEffect(()=>{
 
-    x()
+    passwordGenrator()
   },[length,includeNumbers,includeCharactors,setPassword])
-  const x = useCallback(()=>{
+  const  passwordGenrator = useCallback(()=>{
     let string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     if(includeNumbers) string +="1234567890"
     if(includeCharactors) string +="!@#$%^&*_+?/"
